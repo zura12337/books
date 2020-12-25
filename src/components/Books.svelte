@@ -8,7 +8,9 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     column-gap: 100px;
+    padding-bottom: 50px;
   }
+
   .book {
     width: 100%;
     height: 300px;
@@ -26,7 +28,7 @@
     width: 120px;
     border-radius: 5px;
     margin-right: 10px;
-    box-shadow: 0 4px rgba(0, 75, 70, 0.3);
+    box-shadow: 0 4px 5px rgba(0, 75, 70, 0.3);
   }
 
   .book-description {
@@ -57,12 +59,16 @@
     font-size: 14px;
     outline: none;
     cursor: pointer;
-    box-shadow: 0 1px rgba(0, 75, 70, 0.3);
-    transition: 0.4s transform, 0.3s box-shadow;
+    transition: 0.4s transform, 0.3s box-shadow, 0.2s all;
   }
   .read-more:hover {
-    box-shadow: 0 3px rgba(0, 75, 70, 0.4);
+    box-shadow: 0 3px rgba(42, 100, 96, 0.4);
     transform: translateY(-3px);
+  }
+  .read-more:active {
+    transform: translateY(-2px);
+    background-color: rgb(45, 133, 145);
+    box-shadow: 0 2px rgba(42, 100, 96, 0.4);
   }
 </style>
 
