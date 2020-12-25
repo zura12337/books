@@ -1,5 +1,6 @@
 <script>
 	import { Router, Route } from "svelte-routing";
+	import Book from "./components/Book.svelte";
 	import Books from "./components/Books.svelte";
 	import Navbar from "./components/Navbar.svelte";
 
@@ -16,5 +17,6 @@
 	<Navbar />
 	<div class="container">
 		<Route path="books" component={Books} />
+		<Route path="books/:id" component={Book} />
 	</div>
 </Router>

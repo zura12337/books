@@ -1,5 +1,5 @@
 <script>
-  import App from "../App.svelte";
+  import { Link } from "svelte-routing";
 </script>
 
 <style>
@@ -61,6 +61,10 @@
     cursor: pointer;
     transition: 0.4s transform, 0.3s box-shadow, 0.2s all;
   }
+  .read-more :global(*) {
+    text-decoration: none;
+    color: white;
+  }
   .read-more:hover {
     box-shadow: 0 3px rgba(42, 100, 96, 0.4);
     transform: translateY(-3px);
@@ -93,7 +97,9 @@
             mus lorem eu mollis, consequuntur veritatis quaerat maecenas eaque.
           </p>
         </div>
-        <button class="read-more">Read More</button>
+        <button class="read-more">
+          <Link to="books/1">Read More</Link>
+        </button>
       </div>
     </div>
   </div>
@@ -120,7 +126,9 @@
             quaerat maecenas eaque.
           </p>
         </div>
-        <button class="read-more">Read More</button>
+        <button class="read-more">
+          <Link to="books/1">Read More</Link>
+        </button>
       </div>
     </div>
   </div>
@@ -147,7 +155,9 @@
             quaerat maecenas eaque.
           </p>
         </div>
-        <button class="read-more">Read More</button>
+        <button class="read-more">
+          <Link to="books/1">Read More</Link>
+        </button>
       </div>
     </div>
   </div>
@@ -174,7 +184,9 @@
             quaerat maecenas eaque.
           </p>
         </div>
-        <button class="read-more">Read More</button>
+        <button class="read-more">
+          <Link to="books/1">Read More</Link>
+        </button>
       </div>
     </div>
   </div>
