@@ -1,3 +1,7 @@
+<script>
+  import { Link } from "svelte-routing";
+</script>
+
 <style>
   .nav-list {
     display: flex;
@@ -24,8 +28,12 @@
 <main>
   <div class="navbar">
     <ul class="nav-list">
-      <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
+      <li class="nav-item">
+        <Link class="nav-link" to="/">Home</Link>
+      </li>
+      <li class="nav-item">
+        <Link class="nav-link" to="books">Books</Link>
+      </li>
     </ul>
   </div>
 </main>

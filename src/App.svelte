@@ -1,6 +1,9 @@
 <script>
+	import { Router, Route } from "svelte-routing";
 	import Books from "./components/Books.svelte";
 	import Navbar from "./components/Navbar.svelte";
+
+	export let url = "";
 </script>
 
 <style>
@@ -9,9 +12,9 @@
 	}
 </style>
 
-<main>
+<Router {url}>
 	<Navbar />
 	<div class="container">
-		<Books />
+		<Route path="books" component={Books} />
 	</div>
-</main>
+</Router>
