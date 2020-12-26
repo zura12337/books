@@ -11,10 +11,12 @@
   .nav-item {
     margin-left: 10px;
   }
-  .nav-link {
+  .nav-item :global(a) {
+    color: #444;
+    font-weight: bold;
     text-decoration: none;
   }
-  .nav-link:hover {
+  .nav-item:hover {
     text-decoration: underline;
   }
   .navbar {
