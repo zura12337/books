@@ -2,6 +2,7 @@
 	import { Router, Route } from "svelte-routing";
 	import Book from "./components/Book.svelte";
 	import Books from "./components/Books.svelte";
+	import Home from "./components/Home.svelte";
 	import Navbar from "./components/Navbar.svelte";
 	import RelatedBooks from "./components/RelatedBooks.svelte";
 
@@ -22,6 +23,7 @@
 <Router {url}>
 	<Navbar />
 	<div class="container">
+		<Route path="/" component={Home} />
 		<Route path="books" component={Books} />
 		<Route path="books/:id">
 			<div class="content">
