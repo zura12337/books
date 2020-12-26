@@ -2,6 +2,7 @@
 	import { Router, Route } from "svelte-routing";
 	import Book from "./components/Book.svelte";
 	import Books from "./components/Books.svelte";
+	import Footer from "./components/Footer.svelte";
 	import Home from "./components/Home.svelte";
 	import Navbar from "./components/Navbar.svelte";
 	import RelatedBooks from "./components/RelatedBooks.svelte";
@@ -12,6 +13,7 @@
 <style>
 	.container {
 		margin: 50px 150px;
+		padding-bottom: 2.5rem;
 	}
 	.content {
 		display: grid;
@@ -32,4 +34,5 @@
 			</div>
 		</Route>
 	</div>
+	<Footer />
 </Router>
