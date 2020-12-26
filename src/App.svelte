@@ -37,7 +37,8 @@
 <style>
 	.container {
 		margin: 50px 150px;
-		padding-bottom: 2.5rem;
+		margin-bottom: 0;
+		padding-bottom: 8rem;
 	}
 	.content {
 		display: grid;
