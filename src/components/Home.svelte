@@ -17,8 +17,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(50%);
     transition: 0.2s all;
+    filter: brightness(50%);
   }
   .category:hover > .category-background {
     transform: scale(1.1);
