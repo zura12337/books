@@ -1,6 +1,6 @@
 <script>
 	import { Router, Route } from "svelte-routing";
-	import Book from "./components/Book.svelte";
+	import BookPage from "./components/BookPage.svelte";
 	import Books from "./components/Books.svelte";
 	import Footer from "./components/Footer.svelte";
 	import Home from "./components/Home.svelte";
@@ -29,7 +29,7 @@
 		<Route path="books" component={Books} />
 		<Route path="books/:id">
 			<div class="content">
-				<Book />
+				<BookPage />
 				<RelatedBooks />
 			</div>
 		</Route>
