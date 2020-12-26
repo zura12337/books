@@ -36,6 +36,9 @@
       <li class="nav-item">
         <Link class="nav-link" to="books">Books</Link>
       </li>
+      <li class="nav-item">
+        <Link class="nav-link" to="favorites">Favorites</Link>
+      </li>
     </ul>
   </div>
 </main>
