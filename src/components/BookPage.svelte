@@ -58,11 +58,7 @@
       </div>
     {/if}
     <div class="book-info">
-      {#if bookInfo.volumeInfo.title.length > 35}
-        <h2>{bookInfo.volumeInfo.title.slice(0, 35)}...</h2>
-      {:else}
-        <h2>{bookInfo.volumeInfo.title}</h2>
-      {/if}
+      <h2>{bookInfo.volumeInfo.title}</h2>
       <div class="book-description">
         {#if bookInfo.volumeInfo.authors}
           <p>
