@@ -3,19 +3,27 @@
 
   import Link from "svelte-routing/src/Link.svelte";
   import Icon from "svelte-awesome/components/Icon.svelte";
-  import { starO, star } from "svelte-awesome/icons";
+  import { starO, star, questionCircle } from "svelte-awesome/icons";
 
-  const favoriteBooks =
-    JSON.parse(localStorage.getItem("favorite_books")) || [];
+  let favoriteBooks = JSON.parse(localStorage.getItem("favorite_books")) || [];
   function handleClick() {
     if (bookInfo.favorites) {
-      bookInfo.favorites = !bookInfo.favorites;
+      bookInfo.favorites = undefined;
+      const newBooks = favoriteBooks.filter((item) => bookInfo.id !== item.id);
+      localStorage.setItem("favorite_books", JSON.stringify(newBooks));
     } else {
+      favoriteBooks = JSON.parse(localStorage.getItem("favorite_books")) || [];
       bookInfo.favorites = true;
       const newBooks = [...favoriteBooks, bookInfo];
+      console.log(newBooks);
       localStorage.setItem("favorite_books", JSON.stringify(newBooks));
     }
   }
+  favoriteBooks.forEach((favBook) => {
+    if (favBook.id === bookInfo.id) {
+      bookInfo["favorites"] = true;
+    }
+  });
 </script>
 
 <style>
@@ -111,16 +119,30 @@
     background-color: rgb(153, 110, 30);
     box-shadow: 0 2px rgba(102, 96, 16, 0.5);
   }
+  .undefined-image {
+    float: left;
+    width: 120px;
+    background-color: rgba(168, 168, 168, 0.6);
+    margin-right: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
 </style>
 
 <div class="book">
   <div class="book-main-info">
-    <div class="book-image">
-      <img
-        src={bookInfo.volumeInfo.imageLinks.thumbnail}
-        alt="book-cover"
-        class="book-cover" />
-    </div>
+    {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
+      <div class="book-image">
+        <img
+          src={bookInfo.volumeInfo.imageLinks.thumbnail}
+          alt="book-cover"
+          class="book-cover" />
+      </div>
+    {:else}
+      <div class="undefined-image">
+        <Icon scale="3" data={questionCircle} />
+      </div>
+    {/if}
     <div class="book-info">
       {#if bookInfo.volumeInfo.title.length > 35}
         <h2>{bookInfo.volumeInfo.title.slice(0, 35)}...</h2>
