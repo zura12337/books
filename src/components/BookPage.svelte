@@ -2,13 +2,23 @@
   import { getBook } from "../services/booksService";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import { questionCircle } from "svelte-awesome/icons";
+  import Loading from "./Loading.svelte";
+  import Link from "svelte-routing/src/Link.svelte";
 
   export let id;
 
   let bookInfo;
+  let loading = false;
+  let error;
 
   async function fetchBook() {
+    loading = true;
     bookInfo = await getBook(id);
+    if (typeof bookInfo !== "object") {
+      error = bookInfo;
+      bookInfo = undefined;
+    }
+    loading = false;
   }
 
   fetchBook();
@@ -41,53 +51,57 @@
     display: grid;
     place-items: center;
   }
+  .error {
+    color: rgb(255, 57, 57);
+  }
 </style>
 
-{#if bookInfo}
-  <div class="book">
-    {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
-      <div class="book-image">
-        <img
-          src={bookInfo.volumeInfo.imageLinks.thumbnail}
-          alt="book-cover"
-          class="book-cover" />
-      </div>
-    {:else}
-      <div class="undefined-image">
-        <Icon scale="3" data={questionCircle} />
-      </div>
-    {/if}
-    <div class="book-info">
-      <h2>{bookInfo.volumeInfo.title}</h2>
-      <div class="book-description">
-        {#if bookInfo.volumeInfo.authors}
-          <p>
-            <strong>Author: </strong>{bookInfo.volumeInfo.authors.join(', ')}
-          </p>
-        {/if}
-        {#if bookInfo.volumeInfo.categories}
-          <p>
-            <strong>Genre: </strong>{bookInfo.volumeInfo.categories.join(', ')}
-          </p>
-        {/if}
-        {#if bookInfo.volumeInfo.description}
-          {#if bookInfo.volumeInfo.description.length > 255}
+{#if loading}
+  <Loading />
+{:else}
+  {#if bookInfo}
+    <div class="book">
+      {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
+        <div class="book-image">
+          <img
+            src={bookInfo.volumeInfo.imageLinks.thumbnail}
+            alt="book-cover"
+            class="book-cover" />
+        </div>
+      {:else}
+        <div class="undefined-image">
+          <Icon scale="3" data={questionCircle} />
+        </div>
+      {/if}
+      <div class="book-info">
+        <h2>{bookInfo.volumeInfo.title}</h2>
+        <div class="book-description">
+          {#if bookInfo.volumeInfo.authors}
             <p>
-              <strong>Description:
-              </strong>{bookInfo.volumeInfo.description.slice(0, 255)}
-              ...
+              <strong>Author: </strong>{bookInfo.volumeInfo.authors.join(', ')}
             </p>
-          {:else}
+          {/if}
+          {#if bookInfo.volumeInfo.categories}
+            <p>
+              <strong>Genre:
+              </strong>{bookInfo.volumeInfo.categories.join(', ')}
+            </p>
+          {/if}
+          {#if bookInfo.volumeInfo.country}
+            <p><strong>Country: </strong>{bookInfo.volumeInfo.country}</p>
+          {/if}
+          {#if bookInfo.volumeInfo.description}
             <p>
               <strong>Description: </strong>{bookInfo.volumeInfo.description}
             </p>
           {/if}
-        {/if}
+        </div>
       </div>
     </div>
-  </div>
-{:else}
-  <div class="center">
-    <h3>Loading ...</h3>
-  </div>
+  {:else}
+    <div class="center error">
+      <h2>{error}</h2>
+      <Link to="books">Go to Books page</Link>
+    </div>
+  {/if}
 {/if}

@@ -8,8 +8,12 @@ export async function getBooks() {
 }
 
 export async function getBook(id) {
-  const response = await axios.get(
-    "https://www.googleapis.com/books/v1/volumes/" + id
-  );
-  return response.data;
+  try {
+    const response = await axios.get(
+      "https://www.googleapis.com/books/v1/volumes/" + id
+    );
+    return response.data;
+  } catch (e) {
+    return e.message;
+  }
 }

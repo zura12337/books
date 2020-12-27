@@ -72,7 +72,7 @@
     right: 30px;
     width: 100px;
     height: 40px;
-    background-color: rgb(65, 186, 202);
+    background-color: #41baca;
     color: white;
     border: none;
     border-radius: 10px;
@@ -161,17 +161,7 @@
           </p>
         {/if}
         {#if bookInfo.volumeInfo.description}
-          {#if bookInfo.volumeInfo.description.length > 255}
-            <p>
-              <strong>Description:
-              </strong>{bookInfo.volumeInfo.description.slice(0, 255)}
-              ...
-            </p>
-          {:else}
-            <p>
-              <strong>Description: </strong>{bookInfo.volumeInfo.description}
-            </p>
-          {/if}
+          <div dangerouslySetInnerHTML={{ __html: '<p>FUCK YOu</p>' }} />
         {/if}
       </div>
       <button class="read-more">

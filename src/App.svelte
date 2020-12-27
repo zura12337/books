@@ -10,9 +10,12 @@
 	import { getBooks } from "./services/booksService.js";
 
 	let booksArray;
+	let loading = false;
 
 	async function fetchData() {
+		loading = true;
 		booksArray = await getBooks();
+		loading = false;
 	}
 
 	fetchData();
@@ -38,7 +41,7 @@
 	<div class="container">
 		<Route path="/" component={Home} />
 		<Route path="books">
-			<Books {booksArray} />
+			<Books {loading} {booksArray} />
 		</Route>
 		<Route path="favorites">
 			<Favorites />
