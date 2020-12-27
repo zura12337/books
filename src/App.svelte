@@ -40,8 +40,8 @@
 	<Navbar />
 	<div class="container">
 		<Route path="/" component={Home} />
-		<Route path="books">
-			<Books {loading} {booksArray} />
+		<Route path="books" let:params>
+			<Books {loading} {booksArray} page={params} />
 		</Route>
 		<Route path="favorites">
 			<Favorites />
