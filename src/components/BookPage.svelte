@@ -18,6 +18,7 @@
       error = bookInfo;
       bookInfo = undefined;
     }
+    console.log(bookInfo);
     loading = false;
   }
 
@@ -31,6 +32,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 5px rgba(0, 75, 70, 0.3);
     margin-right: 20px;
+    margin-bottom: 10px;
   }
   .book-info > h2 {
     font-size: 32px;
@@ -87,12 +89,21 @@
               </strong>{bookInfo.volumeInfo.categories.join(', ')}
             </p>
           {/if}
-          {#if bookInfo.volumeInfo.country}
-            <p><strong>Country: </strong>{bookInfo.volumeInfo.country}</p>
+          {#if bookInfo.saleInfo.country}
+            <p><strong>Country: </strong>{bookInfo.saleInfo.country}</p>
+          {/if}
+          {#if bookInfo.volumeInfo.publishedDate}
+            <p>
+              <strong>Publish Date: </strong>{bookInfo.volumeInfo.publishedDate}
+            </p>
+          {/if}
+          {#if bookInfo.volumeInfo.pageCount}
+            <p><strong>Page Count: </strong>{bookInfo.volumeInfo.pageCount}</p>
           {/if}
           {#if bookInfo.volumeInfo.description}
             <p>
-              <strong>Description: </strong>{bookInfo.volumeInfo.description}
+              <strong>Description: </strong>
+              {@html bookInfo.volumeInfo.description}
             </p>
           {/if}
         </div>

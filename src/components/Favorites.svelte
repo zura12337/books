@@ -3,8 +3,6 @@
   import { Link } from "svelte-routing";
 
   let booksArray = JSON.parse(localStorage.getItem("favorite_books")) || [];
-
-  // export let books;
 </script>
 
 <style>

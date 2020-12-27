@@ -1,6 +1,5 @@
 <script>
   export let bookInfo;
-
   import Link from "svelte-routing/src/Link.svelte";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import { starO, star, questionCircle } from "svelte-awesome/icons";
@@ -9,13 +8,15 @@
   function handleClick() {
     if (bookInfo.favorites) {
       bookInfo.favorites = undefined;
-      const newBooks = favoriteBooks.filter((item) => bookInfo.id !== item.id);
+      let newBooks = favoriteBooks.filter((item) => bookInfo.id !== item.id);
+      newBooks = newBooks.reverse();
       localStorage.setItem("favorite_books", JSON.stringify(newBooks));
+      window.location.reload();
     } else {
       favoriteBooks = JSON.parse(localStorage.getItem("favorite_books")) || [];
       bookInfo.favorites = true;
-      const newBooks = [...favoriteBooks, bookInfo];
-      console.log(newBooks);
+      let newBooks = [...favoriteBooks, bookInfo];
+      newBooks = newBooks.reverse();
       localStorage.setItem("favorite_books", JSON.stringify(newBooks));
     }
   }
