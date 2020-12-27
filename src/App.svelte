@@ -41,7 +41,7 @@
 			<Books {booksArray} />
 		</Route>
 		<Route path="favorites">
-			<Favorites books={favoriteBooks} />
+			<Favorites />
 		</Route>
 		<Route path="books/:id" let:params>
 			<div class="content">
