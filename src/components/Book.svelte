@@ -175,7 +175,7 @@
         {/if}
       </div>
       <button class="read-more">
-        <Link to="books/1">Read More</Link>
+        <Link to={`books/${bookInfo.id}`}>Read More</Link>
       </button>
       <button on:click={handleClick} class="add-favorites">
         <Icon data={bookInfo.favorites ? star : starO} />

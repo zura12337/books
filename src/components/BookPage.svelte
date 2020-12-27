@@ -1,3 +1,19 @@
+<script>
+  import { getBook } from "../services/booksService";
+  import Icon from "svelte-awesome/components/Icon.svelte";
+  import { questionCircle } from "svelte-awesome/icons";
+
+  export let id;
+
+  let bookInfo;
+
+  async function fetchBook() {
+    bookInfo = await getBook(id);
+  }
+
+  fetchBook();
+</script>
+
 <style>
   .book-cover {
     float: left;
@@ -19,34 +35,63 @@
     color: #222;
     margin-top: 10px;
   }
+  .center {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
 </style>
 
-<div class="book">
-  <div class="book-image">
-    <!-- svelte-ignore a11y-img-redundant-alt -->
-    <img
-      src="https://prodimage.images-bn.com/pimages/9780393341768_p0_v3_s1200x630.jpg"
-      alt="book-image"
-      class="book-cover" />
-  </div>
-  <div class="book-info">
-    <h2>A Clockwork Orange</h2>
-    <div class="book-description">
-      <p><strong>Author: </strong>Anthony Burgess</p>
-      <p><strong>Genre: </strong>Drama, Science Fiction</p>
-      <p><strong>Country: </strong> Georgia</p>
-      <p>
-        <strong>Description: </strong>Nihil amet sodales auctor! Dictumst
-        excepteur? Voluptas asperiores, qui aute? Eligendi curabitur aliquam
-        mus? Mus omnis arcu porta? Deserunt dignissim posuere odit remnim mus
-        lorem eu mollis, consequuntur veritatis quaerat maecenas eaque.Earum
-        ullam fusce leo hendrerit rerum ratione! Expedita, quas, dignissimos
-        dignissimos minim, eum sollicitudin. Placeat vitae phasellus platea,
-        proin turpis. Voluptate aliquam? Irure recusandae, magnis maecenas qui
-        iure. Platea delectus. Nisi montes, adipiscing, voluptatibus incidunt
-        malesuada aliquip impedit vero necessitatibus, expedita omnis, orci
-        neque accusamus officiis magnis sunt facilisi convallis.
-      </p>
+{#if bookInfo}
+  <div class="book">
+    {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
+      <div class="book-image">
+        <img
+          src={bookInfo.volumeInfo.imageLinks.thumbnail}
+          alt="book-cover"
+          class="book-cover" />
+      </div>
+    {:else}
+      <div class="undefined-image">
+        <Icon scale="3" data={questionCircle} />
+      </div>
+    {/if}
+    <div class="book-info">
+      {#if bookInfo.volumeInfo.title.length > 35}
+        <h2>{bookInfo.volumeInfo.title.slice(0, 35)}...</h2>
+      {:else}
+        <h2>{bookInfo.volumeInfo.title}</h2>
+      {/if}
+      <div class="book-description">
+        {#if bookInfo.volumeInfo.authors}
+          <p>
+            <strong>Author: </strong>{bookInfo.volumeInfo.authors.join(', ')}
+          </p>
+        {/if}
+        {#if bookInfo.volumeInfo.categories}
+          <p>
+            <strong>Genre: </strong>{bookInfo.volumeInfo.categories.join(', ')}
+          </p>
+        {/if}
+        {#if bookInfo.volumeInfo.description}
+          {#if bookInfo.volumeInfo.description.length > 255}
+            <p>
+              <strong>Description:
+              </strong>{bookInfo.volumeInfo.description.slice(0, 255)}
+              ...
+            </p>
+          {:else}
+            <p>
+              <strong>Description: </strong>{bookInfo.volumeInfo.description}
+            </p>
+          {/if}
+        {/if}
+      </div>
     </div>
   </div>
-</div>
+{:else}
+  <div class="center">
+    <h3>Loading ...</h3>
+  </div>
+{/if}

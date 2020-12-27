@@ -18,29 +18,6 @@
 	fetchData();
 
 	export let url = "";
-
-	let favoriteBooks = [
-		{
-			title: "A Clockwork Orange",
-			image:
-				"https://prodimage.images-bn.com/pimages/9780393341768_p0_v3_s1200x630.jpg",
-			description:
-				"Nihil amet sodales auctor! Dictumst excepteur? Voluptas asperiores, qui aute? Eligendi curabitur aliquam mus? Mus omnis arcu porta? Deserunt dignissim posuere odit rem adipisci, porta pretium fugiat! Felis. Consequuntur ridiculus, occaecati consequatur! Doloribus itaque aliquet, luctus. Magnam fugavitae harum. Enim mus lorem eu mollis, consequuntur veritatis quaerat maecenas eaque.",
-			author: "Anthony Burgess",
-			categories: ["Drama", "Science Fiction"],
-			favorites: true,
-		},
-		{
-			title: "A Clockwork Orange",
-			image:
-				"https://prodimage.images-bn.com/pimages/9780393341768_p0_v3_s1200x630.jpg",
-			description:
-				"Nihil amet sodales auctor! Dictumst excepteur? Voluptas asperiores, qui aute? Eligendi curabitur aliquam mus? Mus omnis arcu porta? Deserunt dignissim posuere odit rem adipisci, porta pretium fugiat! Felis. Consequuntur ridiculus, occaecati consequatur! Doloribus itaque aliquet, luctus. Magnam fugavitae harum. Enim mus lorem eu mollis, consequuntur veritatis quaerat maecenas eaque.",
-			author: "Anthony Burgess",
-			categories: ["Drama", "Science Fiction"],
-			favorites: true,
-		},
-	];
 </script>
 
 <style>
@@ -66,9 +43,9 @@
 		<Route path="favorites">
 			<Favorites books={favoriteBooks} />
 		</Route>
-		<Route path="books/:id">
+		<Route path="books/:id" let:params>
 			<div class="content">
-				<BookPage />
+				<BookPage id={params.id} />
 				<RelatedBooks />
 			</div>
 		</Route>
