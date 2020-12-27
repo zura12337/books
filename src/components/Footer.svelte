@@ -43,6 +43,10 @@
         <Icon data={angleRight} />
         <Link to="books">Books</Link>
       </li>
+      <li>
+        <Icon data={angleRight} />
+        <Link to="favorites">Favorites</Link>
+      </li>
     </ul>
   </div>
 </footer>

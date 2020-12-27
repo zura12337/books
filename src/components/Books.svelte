@@ -59,16 +59,16 @@
   }
 </style>
 
-<div class="books">
-  {#if booksArray}
+{#if booksArray}
+  <div class="books">
     {#each booksArray['items'] as book}
       <Book bookInfo={book} />
     {/each}
-  {/if}
-</div>
-<div class="center">
-  <button on:click={fetchBooks} class="load-more">Load More</button>
-</div>
+  </div>
+  <div class="center">
+    <button on:click={fetchBooks} class="load-more">Load More</button>
+  </div>
+{/if}
 {#if loading}
   <Loading />
 {/if}
