@@ -31,13 +31,13 @@
   <div class="navbar">
     <ul class="nav-list">
       <li class="nav-item">
-        <Link class="nav-link" to="/">Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li class="nav-item">
-        <Link class="nav-link" to="books">Books</Link>
+        <Link to="books">Books</Link>
       </li>
       <li class="nav-item">
-        <Link class="nav-link" to="favorites">Favorites</Link>
+        <Link to="favorites">Favorites</Link>
       </li>
     </ul>
   </div>

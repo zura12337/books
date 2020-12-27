@@ -7,6 +7,15 @@
 	import Home from "./components/Home.svelte";
 	import Navbar from "./components/Navbar.svelte";
 	import RelatedBooks from "./components/RelatedBooks.svelte";
+	import { getBooks } from "./services/booksService.js";
+
+	let booksArray;
+
+	async function fetchData() {
+		booksArray = await getBooks();
+	}
+
+	fetchData();
 
 	export let url = "";
 
@@ -51,7 +60,9 @@
 	<Navbar />
 	<div class="container">
 		<Route path="/" component={Home} />
-		<Route path="books" component={Books} />
+		<Route path="books">
+			<Books {booksArray} />
+		</Route>
 		<Route path="favorites">
 			<Favorites books={favoriteBooks} />
 		</Route>

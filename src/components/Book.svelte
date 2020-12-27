@@ -1,17 +1,21 @@
 <script>
+  export let bookInfo;
+
   import Link from "svelte-routing/src/Link.svelte";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import { starO, star } from "svelte-awesome/icons";
 
+  const favoriteBooks =
+    JSON.parse(localStorage.getItem("favorite_books")) || [];
   function handleClick() {
     if (bookInfo.favorites) {
       bookInfo.favorites = !bookInfo.favorites;
     } else {
       bookInfo.favorites = true;
+      const newBooks = [...favoriteBooks, bookInfo];
+      localStorage.setItem("favorite_books", JSON.stringify(newBooks));
     }
   }
-
-  export let bookInfo;
 </script>
 
 <style>
@@ -112,14 +116,41 @@
 <div class="book">
   <div class="book-main-info">
     <div class="book-image">
-      <img src={bookInfo.image} alt="book-cover" class="book-cover" />
+      <img
+        src={bookInfo.volumeInfo.imageLinks.thumbnail}
+        alt="book-cover"
+        class="book-cover" />
     </div>
     <div class="book-info">
-      <h2>{bookInfo.title}</h2>
+      {#if bookInfo.volumeInfo.title.length > 35}
+        <h2>{bookInfo.volumeInfo.title.slice(0, 35)}...</h2>
+      {:else}
+        <h2>{bookInfo.volumeInfo.title}</h2>
+      {/if}
       <div class="book-description">
-        <p><strong>Author: </strong>{bookInfo.author}</p>
-        <p><strong>Genre: </strong>{bookInfo.categories.join(', ')}</p>
-        <p><strong>Description: </strong>{bookInfo.description}</p>
+        {#if bookInfo.volumeInfo.authors}
+          <p>
+            <strong>Author: </strong>{bookInfo.volumeInfo.authors.join(', ')}
+          </p>
+        {/if}
+        {#if bookInfo.volumeInfo.categories}
+          <p>
+            <strong>Genre: </strong>{bookInfo.volumeInfo.categories.join(', ')}
+          </p>
+        {/if}
+        {#if bookInfo.volumeInfo.description}
+          {#if bookInfo.volumeInfo.description.length > 255}
+            <p>
+              <strong>Description:
+              </strong>{bookInfo.volumeInfo.description.slice(0, 255)}
+              ...
+            </p>
+          {:else}
+            <p>
+              <strong>Description: </strong>{bookInfo.volumeInfo.description}
+            </p>
+          {/if}
+        {/if}
       </div>
       <button class="read-more">
         <Link to="books/1">Read More</Link>
