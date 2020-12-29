@@ -9,6 +9,9 @@
     width: 100%;
     height: 100%;
   }
+  .center > :global(*) {
+    margin-bottom: 20px;
+  }
 </style>
 
 <div class="center">

@@ -161,9 +161,6 @@
             <strong>Genre: </strong>{bookInfo.volumeInfo.categories.join(', ')}
           </p>
         {/if}
-        {#if bookInfo.volumeInfo.description}
-          <div dangerouslySetInnerHTML={{ __html: '<p>FUCK YOu</p>' }} />
-        {/if}
       </div>
       <button class="read-more">
         <Link to={`books/${bookInfo.id}`}>Read More</Link>

@@ -4,6 +4,7 @@
   import { questionCircle } from "svelte-awesome/icons";
   import Loading from "./Loading.svelte";
   import Link from "svelte-routing/src/Link.svelte";
+  import RelatedBooks from "./RelatedBooks.svelte";
 
   export let id;
 
@@ -18,7 +19,6 @@
       error = bookInfo;
       bookInfo = undefined;
     }
-    console.log(bookInfo);
     loading = false;
   }
 
@@ -26,8 +26,17 @@
 </script>
 
 <style>
+  .book {
+    display: flex;
+    height: max-content;
+    padding-bottom: 3.5rem;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 0.4fr;
+    gap: 70px;
+  }
   .book-cover {
-    float: left;
     width: 250px;
     border-radius: 10px;
     box-shadow: 0 4px 5px rgba(0, 75, 70, 0.3);
@@ -61,58 +70,67 @@
 {#if loading}
   <Loading />
 {:else}
-  {#if bookInfo}
-    <div class="book">
-      {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
-        <div class="book-image">
-          <img
-            src={bookInfo.volumeInfo.imageLinks.thumbnail}
-            alt="book-cover"
-            class="book-cover" />
-        </div>
-      {:else}
-        <div class="undefined-image">
-          <Icon scale="3" data={questionCircle} />
-        </div>
-      {/if}
-      <div class="book-info">
-        <h2>{bookInfo.volumeInfo.title}</h2>
-        <div class="book-description">
-          {#if bookInfo.volumeInfo.authors}
-            <p>
-              <strong>Author: </strong>{bookInfo.volumeInfo.authors.join(', ')}
-            </p>
-          {/if}
-          {#if bookInfo.volumeInfo.categories}
-            <p>
-              <strong>Genre:
-              </strong>{bookInfo.volumeInfo.categories.join(', ')}
-            </p>
-          {/if}
-          {#if bookInfo.saleInfo.country}
-            <p><strong>Country: </strong>{bookInfo.saleInfo.country}</p>
-          {/if}
-          {#if bookInfo.volumeInfo.publishedDate}
-            <p>
-              <strong>Publish Date: </strong>{bookInfo.volumeInfo.publishedDate}
-            </p>
-          {/if}
-          {#if bookInfo.volumeInfo.pageCount}
-            <p><strong>Page Count: </strong>{bookInfo.volumeInfo.pageCount}</p>
-          {/if}
-          {#if bookInfo.volumeInfo.description}
-            <p>
-              <strong>Description: </strong>
-              {@html bookInfo.volumeInfo.description}
-            </p>
-          {/if}
+  <div class="content">
+    {#if bookInfo}
+      <div class="book">
+        {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
+          <div class="book-image">
+            <img
+              src={bookInfo.volumeInfo.imageLinks.thumbnail}
+              alt="book-cover"
+              class="book-cover" />
+          </div>
+        {:else}
+          <div class="undefined-image">
+            <Icon scale="3" data={questionCircle} />
+          </div>
+        {/if}
+        <div class="book-info">
+          <h2>{bookInfo.volumeInfo.title}</h2>
+          <div class="book-description">
+            {#if bookInfo.volumeInfo.authors}
+              <p>
+                <strong>Author:
+                </strong>{bookInfo.volumeInfo.authors.join(', ')}
+              </p>
+            {/if}
+            {#if bookInfo.volumeInfo.categories}
+              <p>
+                <strong>Genre:
+                </strong>{bookInfo.volumeInfo.categories.join(', ')}
+              </p>
+            {/if}
+            {#if bookInfo.saleInfo.country}
+              <p><strong>Country: </strong>{bookInfo.saleInfo.country}</p>
+            {/if}
+            {#if bookInfo.volumeInfo.publishedDate}
+              <p>
+                <strong>Publish Date:
+                </strong>{bookInfo.volumeInfo.publishedDate}
+              </p>
+            {/if}
+            {#if bookInfo.volumeInfo.pageCount}
+              <p>
+                <strong>Page Count: </strong>{bookInfo.volumeInfo.pageCount}
+              </p>
+            {/if}
+            {#if bookInfo.volumeInfo.description}
+              <p>
+                <strong>Description </strong>
+                {@html bookInfo.volumeInfo.description}
+              </p>
+            {/if}
+          </div>
         </div>
       </div>
-    </div>
-  {:else}
-    <div class="center error">
-      <h2>{error}</h2>
-      <Link to="books">Go to Books page</Link>
-    </div>
-  {/if}
+      {#if bookInfo.volumeInfo.categories}
+        <RelatedBooks category={bookInfo.volumeInfo.categories[0]} />
+      {/if}
+    {:else}
+      <div class="center error">
+        <h2>{error}</h2>
+        <Link to="books">Go to Books page</Link>
+      </div>
+    {/if}
+  </div>
 {/if}

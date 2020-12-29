@@ -6,8 +6,8 @@
 	import Footer from "./components/Footer.svelte";
 	import Home from "./components/Home.svelte";
 	import Navbar from "./components/Navbar.svelte";
-	import RelatedBooks from "./components/RelatedBooks.svelte";
 	import { getBooks } from "./services/booksService.js";
+	import { ToastContainer } from "svelte-toastify";
 
 	let booksArray;
 	let loading = false;
@@ -29,11 +29,6 @@
 		margin-bottom: 0;
 		padding-bottom: 8rem;
 	}
-	.content {
-		display: grid;
-		grid-template-columns: 1fr 0.4fr;
-		gap: 70px;
-	}
 </style>
 
 <Router {url}>
@@ -47,11 +42,9 @@
 			<Favorites />
 		</Route>
 		<Route path="books/:id" let:params>
-			<div class="content">
-				<BookPage id={params.id} />
-				<RelatedBooks />
-			</div>
+			<BookPage id={params.id} />
 		</Route>
 	</div>
 	<Footer />
+	<ToastContainer />
 </Router>
