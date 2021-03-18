@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "svelte-routing";
+  import Link from "svelte-routing/src/Link.svelte";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import { questionCircle } from "svelte-awesome/icons";
 
@@ -33,7 +33,7 @@
   }
 </style>
 
-<a href={`/books/${bookInfo.id}`}>
+<Link to={`/books/${bookInfo.id}`}>
   <div class="book">
     {#if bookInfo.volumeInfo.imageLinks && bookInfo.volumeInfo.imageLinks.thumbnail}
       <div class="book-image">
@@ -70,4 +70,4 @@
       </div>
     </div>
   </div>
-</a>
+</Link>
